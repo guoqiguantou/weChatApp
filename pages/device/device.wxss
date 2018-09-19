@@ -1,0 +1,83 @@
+/**index.wxss**/
+
+.container {
+  overflow: hidden;
+}
+
+.bjtop {
+  width: 100%;
+}
+
+.warp {
+  
+}
+
+.container .itemcard {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.mycard {
+  background: #fff !important;
+}
+
+.container .itemcard navigator {
+  display: inline-block;
+}
+
+.container .ibtn {
+  padding: 0rpx 15rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  margin: 0rpx 10rpx;
+}
+
+.container .i-tags {
+  margin: 0rpx 10rpx;
+}
+
+.container .itemfooter {
+  text-align: right;
+}
+
+.container .ibtn i {
+  font-size: 26rpx !important;
+  margin-right: 5rpx;
+}
+
+.col-class {
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.col-class .itemlistleft {
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.addbtn {
+  width: 90rpx;
+  height: 90rpx;
+  background: #f90;
+  color: #fff;
+  position: fixed;
+  right: 20rpx;
+  bottom: 20rpx;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 100rpx;
+  /* border:3px solid #ddd;  */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.addbtn .iconfont {
+  font-size: 50rpx;
+  display: block;
+  border-radius: 50%;
+  margin: 0px;
+  width: 90rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  /* box-shadow: 0px 0px 20px rgba(33,33,33,0.2) inset; */
+}

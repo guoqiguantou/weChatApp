@@ -1,0 +1,172 @@
+<!--index.wxml-->
+<view class="container">
+<image src='../../image/bjtop.png' class='bjtop' mode='widthFix'></image>
+<view class='warp'>
+  <view class='itemcard'>
+    <i-card title="距离" extra="在线" i-class='mycard'>
+      <view slot="content">
+        <i-row>
+          <i-col span="4" i-class="col-class">
+            <view class='itemlistleft'>编码：</view>
+          </i-col>
+          <i-col span="20" i-class="col-class">
+            <view class='itemlistright'>smp180820159</view>
+          </i-col>
+          <i-col span="4" i-class="col-class">
+            <view class='itemlistleft'>类型： </view>
+          </i-col>
+          <i-col span="20" i-class="col-class">
+            <view class='itemlistright'>超声波</view>
+          </i-col>
+        </i-row>
+      </view>
+      <view slot="footer">
+        <view class='itemfooter'>
+        <navigator url='../query/query'>
+          <i-button bind:click="ondel" type="primary" size="small" inline="true" i-class='ibtn'>
+            <i class="iconfont icon-chazhao"></i>查看
+          </i-button>
+          </navigator>
+          <navigator url='../detail/detail'>
+            <i-button bind:click="ondel" type="success" size="small" inline="true" i-class='ibtn'>
+              <i class="iconfont icon-bianji"></i>编辑
+            </i-button>
+          </navigator>
+          <i-button bind:click="ondel" type='ghost' size="small" inline="true" i-class='ibtn'>
+            <i class="iconfont icon-shanchu"></i>删除
+          </i-button>
+        </view>
+      </view>
+    </i-card>
+  </view>
+  <view class='itemcard'>
+    <i-card title="距离" extra="在线" i-class='mycard'>
+      <view slot="content">
+        <i-row>
+          <i-col span="4" i-class="col-class">
+            <view class='itemlistleft'>编码：</view>
+          </i-col>
+          <i-col span="20" i-class="col-class">
+            <view class='itemlistright'>smp180820159</view>
+          </i-col>
+          <i-col span="4" i-class="col-class">
+            <view class='itemlistleft'>类型： </view>
+          </i-col>
+          <i-col span="20" i-class="col-class">
+            <view class='itemlistright'>超声波</view>
+          </i-col>
+        </i-row>
+      </view>
+      <view slot="footer">
+        <view class='itemfooter'>
+        <navigator url='../query/query'>
+          <i-button bind:click="ondel" type="primary" size="small" inline="true" i-class='ibtn'>
+            <i class="iconfont icon-chazhao"></i>查看
+          </i-button>
+          </navigator>
+          <navigator url='../detail/detail'>
+            <i-button bind:click="ondel" type="success" size="small" inline="true" i-class='ibtn'>
+              <i class="iconfont icon-bianji"></i>编辑
+            </i-button>
+          </navigator>
+          <i-button bind:click="ondel" type='ghost' size="small" inline="true" i-class='ibtn'>
+            <i class="iconfont icon-shanchu"></i>删除
+          </i-button>
+        </view>
+      </view>
+    </i-card>
+  </view>
+  <view class='itemcard'>
+    <i-card title="距离" extra="在线" i-class='mycard'>
+      <view slot="content">
+        <i-row>
+          <i-col span="4" i-class="col-class">
+            <view class='itemlistleft'>编码：</view>
+          </i-col>
+          <i-col span="20" i-class="col-class">
+            <view class='itemlistright'>smp180820159</view>
+          </i-col>
+          <i-col span="4" i-class="col-class">
+            <view class='itemlistleft'>类型： </view>
+          </i-col>
+          <i-col span="20" i-class="col-class">
+            <view class='itemlistright'>超声波</view>
+          </i-col>
+        </i-row>
+      </view>
+      <view slot="footer">
+        <view class='itemfooter'>
+        <navigator url='../query/query'>
+          <i-button bind:click="ondel" type="primary" size="small" inline="true" i-class='ibtn'>
+            <i class="iconfont icon-chazhao"></i>查看
+          </i-button>
+          </navigator>
+          <navigator url='../detail/detail'>
+            <i-button bind:click="ondel" type="success" size="small" inline="true" i-class='ibtn'>
+              <i class="iconfont icon-bianji"></i>编辑
+            </i-button>
+          </navigator>
+          <i-button bind:click="ondel" type='ghost' size="small" inline="true" i-class='ibtn'>
+            <i class="iconfont icon-shanchu"></i>删除
+          </i-button>
+        </view>
+      </view>
+    </i-card>
+  </view>
+  <view class='itemcard'>
+    <i-card title="距离" extra="在线" i-class='mycard'>
+      <view slot="content">
+        <i-row>
+          <i-col span="4" i-class="col-class">
+            <view class='itemlistleft'>编码：</view>
+          </i-col>
+          <i-col span="20" i-class="col-class">
+            <view class='itemlistright'>smp180820159</view>
+          </i-col>
+          <i-col span="4" i-class="col-class">
+            <view class='itemlistleft'>类型： </view>
+          </i-col>
+          <i-col span="20" i-class="col-class">
+            <view class='itemlistright'>超声波</view>
+          </i-col>
+        </i-row>
+      </view>
+      <view slot="footer">
+        <view class='itemfooter'>
+        <navigator url='../query/query'>
+          <i-button bind:click="ondel" type="primary" size="small" inline="true" i-class='ibtn'>
+            <i class="iconfont icon-chazhao"></i>查看
+          </i-button>
+          </navigator>
+          <navigator url='../detail/detail'>
+            <i-button bind:click="ondel" type="success" size="small" inline="true" i-class='ibtn'>
+              <i class="iconfont icon-bianji"></i>编辑
+            </i-button>
+          </navigator>
+          <i-button bind:click="ondel" type='ghost' size="small" inline="true" i-class='ibtn'>
+            <i class="iconfont icon-shanchu"></i>删除
+          </i-button>
+        </view>
+      </view>
+    </i-card>
+  </view>
+</view>
+
+
+
+  <i-toast id="toast" />
+   <navigator url='../add/add'>
+    
+
+    <movable-area style="height:100vh; width: 100vw; background: red;position:fixed">
+    <!-- <movable-view style="height: 50px; width: 50px; background: blue;" x="{{x}}" y="{{y}}" direction="all">
+    </movable-view> -->
+
+
+    <movable-view class='addbtn' direction='vertical'  x="{{x}}" y="{{y}}">
+      <i class="iconfont icon-tianjia1"></i>
+    </movable-view>
+
+  </movable-area>
+  </navigator> 
+</view>

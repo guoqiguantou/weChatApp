@@ -1,0 +1,5 @@
+/**app.wxss**/
+@import 'lib/font/font.wxss';
+.container{
+  background: #F5F5F9;
+}

@@ -1,0 +1,21 @@
+<view class='container'>
+    <i-panel>
+    <i-input value="{{ value1 }}" title="设备编号" placeholder="请输入设备编号" disabled='true' />
+    <i-input value="{{ value2 }}" title="设备名称" placeholder="请输入设备名称" />
+    <i-input value="{{ value3 }}" title="安装地点" placeholder="请输入安装地点" />
+    <i-input value="{{ value4 }}" title="单位" placeholder="请输入单位" disabled='true' />
+    <i-input value="{{ value5 }}" title="测量上限" placeholder="请输入测量上限" disabled='true' />
+    <i-input value="{{ value6 }}" title="测量下限" placeholder="请输入测量下限" disabled='true' />
+    <i-input value="{{ value7 }}" type="textarea" title="备注信息" placeholder="请输入备注信息(最多50字)" maxlength="50" i-class='textareaitem' />
+  </i-panel>
+  <view bindtap="handleClick">
+    <block wx:if="{{true}}">
+      <i-button type="primary">确定</i-button>
+    </block>
+    <block wx:else>
+      <navigator url='../index/index'>
+        <i-button type="primary">确定</i-button>
+      </navigator>
+    </block>
+  </view>
+</view>

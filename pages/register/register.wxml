@@ -1,0 +1,28 @@
+<!--pages/login/login.wxml-->
+<view class="container">
+  <image src='../../image/loginbj.jpg' class='bjtop' mode='widthFix'></image>
+  <view class='login'>
+    <view class='loginwarp'>
+      <i-input value="{{formdata.loginname}}" i-class='myinput' type='textarea' title="登录名" mode="wrapped" placeholder="请输入登录名" error='{{false}}' bind:change='inputchange' data-name='loginname' />
+      <i-input value="{{formdata.password}}" i-class='myinput' type='textarea' title="密码" mode="wrapped" placeholder="请输入密码" error='{{false}}' bind:change='inputchange' data-name='password' />
+      <i-input value="{{formdata.name}}" i-class='myinput' type='textarea' title="姓名" mode="wrapped" placeholder="请输入姓名" error='{{false}}' bind:change='inputchange' data-name='name' />
+      <view class='inputitem'>
+        <view class='inputleft'>性别</view>
+        <view class='inputright'>
+          <radio-group bindchange="radioChange" class='radiowarp'>
+            <label wx:for="{{items}}" wx:key="{{item.value}}" class='radioitem'>
+              <radio value="{{item.value}}" checked="true" color='#2D8CF0' />{{item.name}}
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <i-input value="{{formdata.phone}}" i-class='myinput' type='textarea' title="手机号" mode="wrapped" placeholder="请输入手机号" error='{{false}}' bind:change='inputchange' data-name='phone' />
+      <i-input value="{{formdata.email}}" i-class='myinput' type='textarea' title="邮箱" mode="wrapped" placeholder="请输入邮箱" error='{{false}}' bind:change='inputchange' data-name='email' />
+    </view>
+    <view class='btn-g'>
+      <i-button bind:click="handleClick" type="primary">立即注册</i-button>
+      <i-button bind:click="backlogin" type="success">返回登录</i-button>
+    </view>
+  </view>
+  <i-load-more tip="数据采集系统" loading="{{ false }}" />
+</view>

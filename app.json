@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/register/register",
+    "pages/device/device",
+    "pages/add/add",
+    "pages/logs/logs",
+    "pages/detail/detail",
+    "pages/query/query",
+    "pages/my/my",
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#108EE9",
+    "navigationBarTitleText": "设备管理",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#949494",
+    "selectedColor": "#33a3f4",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "image/index1.png",
+        "selectedIconPath": "image/index1c.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/device/device",
+        "iconPath": "image/index2.png",
+        "selectedIconPath": "image/index2c.png",
+        "text": "设备管理"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "image/index3.png",
+        "selectedIconPath": "image/index3c.png",
+        "text": "个人中心"
+      }
+    ]
+  }
+}

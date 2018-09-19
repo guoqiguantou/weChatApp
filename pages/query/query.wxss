@@ -1,0 +1,4 @@
+/* pages/query/query.wxss */
+.container{
+  height:100vh;
+}

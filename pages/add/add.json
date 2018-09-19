@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "添加设备",
+  "usingComponents": {
+    "i-input": "../../dist/input/index",
+    "i-panel": "../../dist/panel/index",
+    "i-button": "../../dist/button/index",
+    "i-toast": "../../dist/toast/index"
+  }
+}

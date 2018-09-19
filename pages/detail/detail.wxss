@@ -1,0 +1,10 @@
+/* pages/detail/detail.wxss */
+
+.container {
+  background: #fff;
+}
+
+.container .textareaitem {
+  min-height: 80px;
+}
+
