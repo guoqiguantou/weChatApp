@@ -3,8 +3,8 @@
   <image src='../../image/loginbj.jpg' class='bjtop' mode='widthFix'></image>
   <view class='login'>
     <view class='loginwarp'>
-      <i-input value="{{ formdata.name }}" title="登录名" type='textarea' mode="wrapped" placeholder="请输入登录名" i-class='myinput' bind:change='inputchange' data-name='name'/>
-      <i-input value="{{ formdata.password }}" type="password" type='textarea' title="密码" mode="wrapped" placeholder="请输入密码" i-class='myinput' bind:change='inputchange' data-name='password'/>
+      <i-input value="{{ formdata.name }}" title="登录名"  mode="wrapped" placeholder="请输入登录名" i-class='myinput' bind:change='inputchange' data-name='name'/>
+      <i-input value="{{ formdata.password }}" type="password" type='password' title="密码" mode="wrapped" placeholder="请输入密码" i-class='myinput' bind:change='inputchange' data-name='password'/>
       <view class='switchitem'>
         <text>记住密码</text>
         <i-switch value="{{formdata.switchitem}}" bind:change="onswitchChange" slot="footer">
@@ -21,4 +21,5 @@
   <view class='btn-g'>
     <i-button bind:click="registerfunc" type="success">注册新账号</i-button>
   </view>
+  <i-message id="message" />
 </view>

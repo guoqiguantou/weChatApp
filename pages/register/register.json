@@ -9,6 +9,8 @@
     "i-input": "../../dist/input/index",
     "i-radio-group": "../../dist/radio-group/index",
     "i-radio": "../../dist/radio/index",
-    "i-load-more": "../../dist/load-more/index"
+    "i-load-more": "../../dist/load-more/index",
+    "i-message": "../../dist/message/index",
+    "i-toast": "../../dist/toast/index"
   }
 }

@@ -1,14 +1,16 @@
 {
   "pages": [
+    "pages/blue/blue",
     "pages/login/login",
-    "pages/register/register",
+    "pages/detail/detail",
     "pages/device/device",
+    "pages/register/register",
     "pages/add/add",
     "pages/logs/logs",
-    "pages/detail/detail",
     "pages/query/query",
     "pages/my/my",
     "pages/index/index"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

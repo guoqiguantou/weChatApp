@@ -1,4 +1,13 @@
 /* pages/query/query.wxss */
-.container{
-  height:100vh;
+
+.container {
+  height: 100vh;
+  background: #fff;
+}
+
+.warp {
+  height: 50vh;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
 }

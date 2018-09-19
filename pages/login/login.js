@@ -1,4 +1,32 @@
 // pages/login/login.js
+const { $Message } = require('../../dist/base/index');
+function WebSocketTest() {
+  // 打开一个 web socket
+  ws = new WebSocket("ws://192.168.3.203:9092/deviceData-websocket");
+
+  ws.onopen = function () {
+    // Web Socket 已连接上，使用 send() 方法发送数据
+    ws.send("发送数据");
+    console.log("数据发送中...");
+  };
+
+  ws.onmessage = function (evt) {
+    var received_msg = evt.data;
+    console.log(received_msg)
+    console.log("数据已接收...");
+  };
+
+  ws.onclose = function () {
+    // 关闭 websocket
+    console.log("连接已关闭...");
+  };
+
+  ws.onerror = function (evt) {
+    // 关闭 websocket
+    console.log(evt.data);
+  };
+
+}
 Page({
 
   /**
@@ -29,15 +57,44 @@ Page({
   },
   registerfunc:function(){
     //调转注册页面
-    wx.navigateTo({
-      url: '../register/register'
-    })
+    // wx.navigateTo({
+    //   url: '../register/register'
+    // })
+    //WebSocketTest();
+
+    // wx.connectSocket({
+    //   url: 'wss://192.168.3.203:9092/deviceData-websocket',
+    //   data: {
+    //     x: '',
+    //     y: ''
+    //   },
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   protocols: ['protocol1'],
+    //   method: "GET"
+    // })
   },
   handleClick:function(){
-    console.log(this.data.formdata);
-    wx.switchTab({
-      url: '../device/device'
-    })
+    if(this.data.formdata.name==''){
+      $Message({
+        content: '登录名不能为空',
+        type: 'warning',
+        duration:1
+      });
+    } else if (this.data.formdata.password==''){
+      $Message({
+        content: '密码不能为空',
+        type: 'warning',
+        duration: 1
+      });
+    }else{
+      wx.switchTab({
+        url: '../device/device'
+      })
+    }
+    
+    
   },
   /**
    * 生命周期函数--监听页面加载

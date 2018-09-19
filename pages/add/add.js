@@ -1,5 +1,6 @@
 // pages/add/add.js
 const { $Toast } = require('../../dist/base/index');
+const { $Message } = require('../../dist/base/index');
 Page({
 
   /**
@@ -14,14 +15,7 @@ Page({
       value5: '',
       value6: '',
       value7: '',
-    },
-    value2: '',
-    value3: '',
-    value4: '',
-    value5: '',
-    value6: '',
-    value7: '',
-    islink: false,
+    }
   },
   scanCode: function () {
     var that = this
@@ -30,57 +24,51 @@ Page({
         var str = res.result;
         var newarr = JSON.parse(str);
         that.setData({
-          value1: newarr.value1,
-          value2: newarr.value2,
-          value3: newarr.value3,
-          value4: newarr.value4,
-          value5: newarr.value5,
-          value6: newarr.value6,
-          value7: newarr.value7,
+          formdata: newarr
         })
       },
       fail: function (res) {
       }
     })
   },
-  onChange(event) {
-    const detail = event.detail;
-    // this.setData({
-    //   ['formdata[' + event.detail.name + '].checked']: detail.checked
-    //  })
-
+  inputchange: function (event) {
+    var detail = event.detail.detail;
+    var name = event.currentTarget.dataset.name;
+    this.setData({
+      ['formdata.' + name]: detail.value
+    })
   },
   handleClick: function () {
-    // if (this.data.value1==''){
-    //   $Toast({
-    //     content: '设备编码不能为空',
-    //     type: 'error',
-    //     duration: 1
-    //   });
-    // } else if(this.data.value2 == ''){
-    //   $Toast({
-    //     content: '设备名称不能为空',
-    //     type: 'error',
-    //     duration: 1
-    //   });
-    // } else if (this.data.value3 == '') {
-    //   $Toast({
-    //     content: '安装地点不能为空',
-    //     type: 'error',
-    //     duration: 1
-    //   });
-    // } else if (this.data.value7 == '') {
-    //   $Toast({
-    //     content: '备注信息不能为空',
-    //     type: 'error',
-    //     duration: 1
-    //   });
-    // }else{
-    //   this.setData({
-    //     islink:true
-    //   })
-    // }
-    console.log(this.data);
+    console.log(this.data.formdata);
+    if (this.data.formdata.value1 == '') {
+      $Message({
+        content: '设备编码不能为空',
+        type: 'warning'
+      });
+    } else if (this.data.formdata.value2 == '') {
+      $Message({
+        content: '设备名称不能为空',
+        type: 'warning'
+      });
+    } else if (this.data.formdata.value3 == '') {
+      $Message({
+        content: '安装地点不能为空',
+        type: 'warning'
+      });
+    } else if (this.data.formdata.value7 == '') {
+      $Message({
+        content: '备注信息不能为空',
+        type: 'warning'
+      });
+    } else {
+      $Toast({
+        content: '添加成功',
+        type: 'success'
+      });
+      // wx.switchTab({
+      //   url: '../device/device'
+      // })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

@@ -1,21 +1,16 @@
 /* pages/register/register.wxss */
 
 .container {
-  overflow: hidden;
-  position: relative;
+  background: #fff;
 }
 
 .bjtop {
-  position: absolute;
-  left: 0px;
-  top: 0px;
   width: 100%;
-  height: 356rpx;
+  display: block;
 }
 
 .login {
   width: 100%;
-  margin-top: 300rpx;
   background-color: #fff;
   padding: 10rpx 10rpx 20rpx;
   box-sizing: border-box;
@@ -67,7 +62,7 @@
 }
 
 .inputitem .inputright .radioitem {
-  margin: 0px 5px;
+  margin-right: 15px;
 }
 
 .btn-g {
