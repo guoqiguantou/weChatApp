@@ -38,9 +38,54 @@ App({
         this.globalData.screenWidth = res.screenWidth
       }
     })
+    //获取网络状态
+    wx.getNetworkType({
+      success:res=>{
+        //console.log(res);
+      }
+    })
+    //获取wifi
+    wx.startWifi({
+      success: res => {
+        //console.log('初始化成功'+res);
+        wx.getConnectedWifi({
+          success: res => {
+            //console.log(res);
+          },
+          fail: res => {
+           // console.log(res);
+          }
+        })
+      },
+      fail: res => {
+        //console.log('初始化失败' + res);
+      }
+    })
+    //获取网络地址
+    wx.request({
+      url: 'http://192.168.3.204:8904/getAllServer',
+      success:(result)=>{
+        //console.log('request success', result.data)
+        this.globalData.cjdevice = result.data['cj-device'];
+        this.globalData.cjsystem = result.data['cj-system'];
+      },
+
+      fail: function ({
+        errMsg
+      }) {
+        console.log('request fail', errMsg)
+      }
+    })
+
   },
   globalData: {
     userInfo: null,
-    screenWidth:null
+    screenWidth:null,
+    token:null,
+    userId:null,
+
+    cjdevice:null,//设备地址
+    cjsystem:null,//系统地址
+
   }
 })

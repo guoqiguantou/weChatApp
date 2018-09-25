@@ -1,5 +1,6 @@
 const app = getApp();
 const { $Toast } = require('../../dist/base/index');
+
 function inArray(arr, key, val) {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i][key] === val) {
@@ -22,7 +23,7 @@ function ab2hex(buffer) {
 
 Page({
   data: {
-    devices: [],
+    devices: [],//设备
     connected: false,
     chs: [],//特性值
   },

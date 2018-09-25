@@ -1,5 +1,4 @@
 <!--pages/blue/blue.wxml-->
-<text>pages/blue/blue.wxml</text>
 <wxs module="utils">
 module.exports.max = function(n1, n2) {
   return Math.max(n1, n2)

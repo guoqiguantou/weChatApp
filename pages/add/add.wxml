@@ -4,9 +4,9 @@
     <text>扫一扫输入设备信息</text>
   </view>
   <i-panel>
-    <i-input value="{{ formdata.value1 }}" title="设备编号" placeholder="请输入设备编号" bind:change='inputchange' data-name='value1' />
-    <i-input value="{{ formdata.value2 }}" title="设备名称" placeholder="请输入设备名称" bind:change='inputchange' data-name='value2'  />
-    <i-input value="{{ formdata.value3 }}" title="安装地点" placeholder="请输入安装地点" bind:change='inputchange' data-name='value3'  />
+    <i-input value="{{ formdata.value1 }}" type='textarea' title="设备编号" placeholder="请输入设备编号" bind:change='inputchange' data-name='value1' bind:blur="getuserid"/>
+    <i-input value="{{ formdata.value2 }}" type='textarea' title="设备名称" placeholder="请输入设备名称" bind:change='inputchange' data-name='value2'  />
+    <i-input value="{{ formdata.value3 }}" type='textarea' title="安装地点" placeholder="请输入安装地点" bind:change='inputchange' data-name='value3'  />
     <i-input value="{{ formdata.value4 }}" title="单位" placeholder="请输入单位" bind:change='inputchange' data-name='value4'  disabled/>
     <i-input value="{{ formdata.value5 }}" title="测量上限" placeholder="请输入测量上限" bind:change='inputchange' data-name='value5'  disabled/>
     <i-input value="{{ formdata.value6 }}" title="测量下限" placeholder="请输入测量下限" bind:change='inputchange' data-name='value6'  disabled/>

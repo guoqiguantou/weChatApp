@@ -1,10 +1,7 @@
 /* pages/detail/detail.wxss */
-
-.container {
-  background: #fff;
+.container{
+  height:100vh;
 }
-
-.container .textareaitem {
-  min-height: 80px;
+.warp{
+  height:50%;
 }
-

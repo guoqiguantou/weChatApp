@@ -1,16 +1,22 @@
 {
   "pages": [
-    "pages/blue/blue",
     "pages/login/login",
-    "pages/detail/detail",
+    "pages/add/add",
+   
     "pages/device/device",
     "pages/register/register",
-    "pages/add/add",
-    "pages/logs/logs",
-    "pages/query/query",
-    "pages/my/my",
-    "pages/index/index"
     
+    
+    
+    
+    "pages/my/my",
+    "pages/blue/blue",
+    "pages/detail/detail",
+    
+    
+    "pages/logs/logs",
+    "pages/edit/edit",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -40,7 +46,7 @@
         "pagePath": "pages/my/my",
         "iconPath": "image/index3.png",
         "selectedIconPath": "image/index3c.png",
-        "text": "个人中心"
+        "text": "个人设置"
       }
     ]
   }

@@ -1,1 +1,64 @@
 /* pages/my/my.wxss */
+.container{
+  height:100vh;
+}
+.btn-g{
+  margin:0px 15px;
+}
+.mybtn{
+  margin:10px 5px!important;
+}
+.container .itemcard {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.mycard {
+  background: #fff !important;
+}
+
+.container .itemcard navigator {
+  display: inline-block;
+}
+
+.container .ibtn {
+  padding: 0rpx 15rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  margin: 0rpx 10rpx;
+}
+
+.container .i-tags {
+  margin: 0rpx 10rpx;
+}
+
+.container .itemfooter {
+  text-align: right;
+}
+
+.container .ibtn i {
+  font-size: 26rpx !important;
+  margin-right: 5rpx;
+}
+
+.col-class {
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.col-class .itemlistleft {
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.mymodal{
+  padding: 20rpx 40rpx;
+  box-sizing: border-box;
+}
+.myinput{
+  border:1px solid #ddd;
+  height:70rpx;
+  line-height: 70rpx;
+  text-align: left;
+  padding:0px 10rpx; 
+}

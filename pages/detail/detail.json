@@ -1,10 +1,6 @@
 {
-  "navigationBarTitleText": "编辑设备",
+  "navigationBarTitleText": "设备信息",
   "usingComponents": {
-    "i-input": "../../dist/input/index",
-    "i-panel": "../../dist/panel/index",
-    "i-button": "../../dist/button/index",
-    "i-toast": "../../dist/toast/index",
-    "i-message": "../../dist/message/index"
+    "ec-canvas": "../../lib/ec-canvas/ec-canvas"
   }
 }

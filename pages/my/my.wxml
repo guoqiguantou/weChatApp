@@ -1,2 +1,80 @@
 <!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+<wxs module="utils">
+  module.exports.max = function(n1, n2) {
+    return Math.max(n1, n2)
+  }
+  module.exports.len = function(arr) {
+    arr = arr || []
+    return arr.length
+  }
+</wxs>
+<view class='container'>
+
+  <i-cell-group>
+    <i-cell title="{{start?'初始化蓝牙：已开启':'初始化蓝牙：未开启'}}">
+      <i-switch value="{{start}}" size="large" bind:change="onChange" slot="footer">
+        <view slot="open">开启</view>
+        <view slot="close">关闭</view>
+      </i-switch>
+    </i-cell>
+  </i-cell-group>
+
+  <view class='btn-g'>
+    <i-row>
+      <i-col span="12">
+        <i-button bind:click="searchfunc" type="primary" size="small" i-class='mybtn' loading="{{issearch}}">搜索设备</i-button>
+      </i-col>
+      <i-col span="12">
+        <i-button bind:click="stopsearchfunc" type="success" size="small" i-class='mybtn'>停止搜索</i-button>
+      </i-col>
+    </i-row>
+  </view>
+
+  <view class='itemcard' wx:for="{{devices}}" wx:key="*this">
+    <i-card title="{{item.name}}" extra="{{item.deviceId==connectId?'已连接':'未连接'}}" i-class='mycard'>
+      <view slot="content">
+        <i-row>
+          <i-col span="7" i-class="col-class">
+            <view class='itemlistleft'>设备ID：</view>
+          </i-col>
+          <i-col span="17" i-class="col-class">
+            <view class='itemlistright'>{{item.deviceId}}</view>
+          </i-col>
+          <i-col span="7" i-class="col-class">
+            <view class='itemlistleft'>信号强度： </view>
+          </i-col>
+          <i-col span="17" i-class="col-class">
+            <view class='itemlistright'>{{item.RSSI}}dBm ({{utils.max(0, item.RSSI + 100)}}%)</view>
+          </i-col>
+        </i-row>
+      </view>
+      <view slot="footer">
+        <view class='itemfooter'>
+          <i-button type="success" size="small" inline="true" i-class='ibtn' bind:click="connectfunc" data-device-id="{{item.deviceId}}" data-name="{{item.name || item.localName}}" disabled="{{connected}}">
+            <i class="iconfont icon-tianjia">连接设备</i>
+          </i-button>
+          <i-button type="primary" size="small" inline="true" i-class='ibtn' bind:click="sendmsgfunc" disabled="{{!connected||item.deviceId!=connectId}}">
+            <i class="iconfont icon-bianji"></i>发送消息
+          </i-button>
+          <i-button type="ghost" size="small" inline="true" i-class='ibtn' bind:click="cancelconnectfunc" disabled="{{!connected}}">
+            <i class="iconfont icon-shanchu"></i>取消连接
+          </i-button>
+        </view>
+      </view>
+    </i-card>
+  </view>
+
+
+  <i-modal title="提示" visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClick">
+    <view>请先初始化蓝牙模块</view>
+  </i-modal>
+  <i-modal title="发送消息" visible="{{ visible2 }}" actions="{{ actions }}" bind:click="sendmsgokfunc">
+    <view class='mymodal'>
+      <input placeholder='请输入需要发送的消息' class='myinput' bindinput="sendinput" />
+    </view>
+  </i-modal>
+  <i-modal title="提示" visible="{{ visible3 }}" actions="{{ actions }}" bind:click="tipfunc">
+    <view>请检查手机蓝牙是否打开</view>
+  </i-modal>
+  <i-toast id="toast" />
+</view>

@@ -1,108 +1,61 @@
-// pages/detail/detail.js
-const { $Toast } = require('../../dist/base/index');
-const { $Message } = require('../../dist/base/index');
+import * as echarts from '../../lib/ec-canvas/echarts.common.min';
+
+function initChart(canvas, width, height) {
+  const chart = echarts.init(canvas, null, {
+    width: width,
+    height: height
+  });
+  canvas.setChart(chart);
+
+  // var option = {
+  //   yAxis: {
+  //     type: 'category',
+  //     boundaryGap: false,
+  //     inverse: 'true',
+  //     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  //     // axisLabel: {
+  //     //    rotate: 90,
+  //     //    color: '#ff0000',
+  //     //  }
+  //   },
+  //   xAxis: {
+  //     type: 'value',
+  //     color: '#ff0000',
+  //     position: 'top', //x 轴的位置【top bottom】
+  //     // axisLabel: {  //坐标轴刻度标签的相关设置。
+  //     //   rotate: 90 //刻度标签旋转的角度，
+  //     // }
+  //   },
+  //   series: [{
+  //     data: [820, 932, 901, 934, 1290, 1330, 1320],
+  //     type: 'line',
+  //     areaStyle: {}
+  //   }]
+  // };
+  var option = {
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    },
+    yAxis: {
+      type: 'value',
+      color: '#ff0000',
+    },
+    series: [{
+      data: [120, 332, 101, 534, 290, 330, 320],
+      type: 'line',
+      areaStyle: {}
+    }]
+  };
+  chart.setOption(option);
+  return chart;
+}
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    formdata: {
-      value1: 'smp180820289',
-      value2: '设备A',
-      value3: '华南',
-      value4: 'cm',
-      value5: '3000.000',
-      value6: '0.000',
-      value7: '余生都是你',
+    ec: {
+      onInit: initChart
     }
-  },
-  handleClick: function () {
-    console.log(this.data.formdata);
-    if (this.data.formdata.value2==''){
-      $Message({
-        content: '设备名称不可以为空',
-        type: 'warning'
-      });
-    } else if (this.data.formdata.value3 == ''){
-      $Message({
-        content: '安装地点不可以为空',
-        type: 'warning'
-      });
-    } else if (this.data.formdata.value7 == '') {
-      $Message({
-        content: '备注信息不可以为空',
-        type: 'warning'
-      });
-    }else{
-      $Toast({
-        content: '编辑成功',
-        type: 'success'
-      });
-    }
-    
-
-  },
-  inputchange: function (event) {
-    var detail = event.detail.detail;
-    var name = event.currentTarget.dataset.name;
-    this.setData({
-      ['formdata.' + name]: detail.value
-    })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
-})
+});

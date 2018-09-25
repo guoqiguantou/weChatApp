@@ -5,6 +5,7 @@ const {
 const {
   $Toast
 } = require('../../dist/base/index');
+var util = require('../../utils/md5.js')
 Page({
 
   /**
@@ -12,38 +13,38 @@ Page({
    */
   data: {
     items: [{
-        name: '男',
-        value: '1'
-      },
-      {
-        name: '女',
-        value: '0'
-      },
+      name: '男',
+      value: '男'
+    },
+    {
+      name: '女',
+      value: '女'
+    },
     ],
     isphone: false,
-    isemail:false,
+    isemail: false,
     formdata: {
       loginname: '',
       password: '',
       name: '',
       phone: '',
       email: '',
-      sex: 0
+      sex: '女'
     }
   },
-  radioChange: function(e) {
+  radioChange: function (e) {
     this.setData({
       'formdata.sex': e.detail.value
     })
   },
-  inputchange: function(event) {
+  inputchange: function (event) {
     var detail = event.detail.detail;
     var name = event.currentTarget.dataset.name;
     this.setData({
       ['formdata.' + name]: detail.value
     })
   },
-  phonefunc: function(event) {
+  phonefunc: function (event) {
     var detail = event.detail.detail;
     var pattern = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
     if (!pattern.test(detail.value)) {
@@ -61,7 +62,7 @@ Page({
       })
     }
   },
-  emailfunc: function (event){
+  emailfunc: function (event) {
     var detail = event.detail.detail;
     var pattern = /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{2,4}){1,3}$/;
     if (!pattern.test(detail.value)) {
@@ -79,12 +80,12 @@ Page({
       })
     }
   },
-  handleClick: function() {
+  handleClick: function () {
     //点击注册
     console.log(this.data.formdata);
-    if (this.data.formdata.loginname == '') {
+    if (this.data.formdata.loginname == '' || this.data.formdata.loginname.length < 6 || this.data.formdata.loginname.length > 12) {
       $Message({
-        content: '登录名不能为空',
+        content: '登录名不能为空且长度大于5位小于12位',
         type: 'warning',
         duration: 1
       });
@@ -125,12 +126,57 @@ Page({
         duration: 1
       });
     } else {
-       $Toast({
-          content: '注册中',
-          type: 'loading',
-          duration: 1
-        });
-      
+      $Toast({
+        content: '注册中',
+        type: 'loading',
+        duration: 1
+      });
+      var spassword = util.hexMD5(this.data.formdata.password)
+      var loginName = this.data.formdata.loginname, passWord = spassword, userName = this.data.formdata.name, sex = this.data.formdata.sex, telephone = this.data.formdata.phone, email = this.data.formdata.email
+      //192.168.3.202:8080/userLogin/addUser?loginName=?&passWord=?等等参数
+      wx.request({
+        url: 'http://192.168.3.203:9092/userLogin/addUser',
+        data: {
+          loginName: loginName,
+          passWord: passWord,
+          userName: userName,
+          sex: sex,
+          telephone: telephone,
+          email: email
+        },
+        success: function (result) {
+          $Toast({
+            content: result.data,
+            duration: 1
+          });
+
+          //console.log('request success', result.data)
+          // if (result.data.resultCode == '0000') {
+
+          //   setTimeout(function () {
+          //     wx.switchTab({
+          //       url: '../device/device'
+          //     })
+          //   }, 1000)
+
+          // } else {
+          //   $Toast({
+          //     content: result.data.resultDesc,
+          //     type: 'error',
+          //     duration: 1
+          //   });
+          // }
+        },
+
+        fail: function ({
+          errMsg
+        }) {
+          console.log('request fail', errMsg)
+        }
+      })
+
+
+
       // setTimeout(() => {
       //   $Toast.hide();
       //   wx.navigateTo({
@@ -140,7 +186,7 @@ Page({
     }
 
   },
-  backlogin: function() {
+  backlogin: function () {
     //返回登录页面
     wx.navigateTo({
       url: '../login/login'
@@ -150,56 +196,56 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
