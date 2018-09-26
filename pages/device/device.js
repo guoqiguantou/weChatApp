@@ -1,82 +1,40 @@
 //index.js
-//获取应用实例
-//wx6d4cb199cb91ef95
+const { $Toast } = require('../../dist/base/index');
 const app = getApp();
-const {
-  $Toast
-} = require('../../dist/base/index');
 var sw = app.globalData.screenWidth - 50; //屏幕宽度
 Page({
   data: {
     x: sw,
     y: 10,
-    listarr: []
+    listarr: [],/*设备数据列表*/
   },
-  ondel: function(event) {
+  /*删除事件*/
+  ondel: function (event) {
     var deviceId = event.currentTarget.dataset.deviceid;
-    var token = app.globalData.token;
     wx.request({
       url: `http://${app.globalData.cjdevice}deviceDistribution/deleteDeviceFromUser`,
       data: {
-        currentLoginName: Object.keys(token)[0],
-        token: Object.values(token)[0],
+        currentLoginName: Object.keys(this.token)[0],
+        token: Object.values(this.token)[0],
         deviceId: deviceId,
-        userId: app.globalData.userId
+        userId: this.userId
       },
-      success: function(result) {
-        console.log('request success', result.data);
+      success: function (result) {
         $Toast({
           content: result.data,
-          type: 'warning',
-          duration: 1
+          type: 'success',
+          duration: 2
         });
       },
-
-      fail: function({
+      fail: function ({
         errMsg
       }) {
         console.log('request fail', errMsg)
       }
     })
-
   },
-  onLoad: function() {
-    var that = this;
-    var userId = app.globalData.userId;
-    wx.connectSocket({
-      url: `ws://${app.globalData.cjdevice}deviceData-websocket`,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success() {
-        //console.log('连接成功');
-      },
-      fail() {
-        //console.log('连接失败')
-      }
-    })
-    //监听WebSocket 连接打开事件
-    wx.onSocketOpen(function() {
-      //连接发送数据
-      wx.sendSocketMessage({
-        data: JSON.stringify(userId),
-      })
-      //监听接受到服务器的消息事件
-      wx.onSocketMessage(function(res) {
-
-        if (that.isjson(res.data)) {
-          var newlist = JSON.parse(res.data);
-          that.setData({
-            listarr: newlist
-          })
-        }
-        console.log(that.data.listarr);
-
-      })
-    })
-  },
-  isjson: function(str) {
+  /*判断是不是json字符串*/
+  isjson: function (str) {
     if (typeof str == 'string') {
       try {
         var obj = JSON.parse(str);
@@ -85,12 +43,44 @@ Page({
         } else {
           return false;
         }
-
       } catch (e) {
-        //console.log('error：' + str + '!!!' + e);
         return false;
       }
     }
-    //console.log('It is not a string!')
+  },
+  /*生命周期函数--监听页面加载*/
+  onLoad: function () {
+    this.userId = wx.getStorageSync('userId');
+    this.token = wx.getStorageSync('token');
+    //创建webSocket连接
+    var webSocketa=wx.connectSocket({
+      url: `ws://${app.globalData.cjdevice}deviceData-websocket`,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success() {
+      },
+      fail() {
+      }
+    });
+    //监听WebSocket 连接打开事件
+    webSocketa.onOpen((res) => {
+      //连接发送数据
+      webSocketa.send({
+        data: JSON.stringify(this.userId),
+      })
+      //监听接受到服务器的消息事件
+      webSocketa.onMessage((res) => {
+        if (this.isjson(res.data)) {
+          var newlist = JSON.parse(res.data);
+          this.setData({
+            listarr: newlist
+          })
+          console.log(this.data.listarr);
+        }
+      })
+    })
+    
   }
 })

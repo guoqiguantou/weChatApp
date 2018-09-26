@@ -1,6 +1,6 @@
 // pages/add/add.js
-const {$Toast} = require('../../dist/base/index');
-const {$Message} = require('../../dist/base/index');
+const { $Toast } = require('../../dist/base/index');
+const { $Message } = require('../../dist/base/index');
 var app = getApp();
 Page({
 
@@ -9,144 +9,147 @@ Page({
    */
   data: {
     formdata: {
-      value1: '',
-      value2: '',
-      value3: '',
-      value4: '',
-      value5: '',
-      value6: '',
-      value7: '',
+      deviceCode: '',/*设备编码*/
+      deviceName: '',/*设备名称*/
+      position: '',/*安装位置*/
+      unit: '',/*单位*/
+      upperLimit: '',/*测量上限*/
+      lowerLimit: '',/*测量下限*/
+      remark: '',/*备注*/
+      deviceId: ''/*设备id*/
     }
   },
-  scanCode: function() {
-    var that = this
+  /*扫一扫*/
+  scanCode: function () {
     wx.scanCode({
-      success: function(res) {
-        var str = res.result;
-        var newarr = JSON.parse(str);
-        that.setData({
-          formdata: newarr
-        })
+      success:(res)=>{
+        let str = res.result;
+        let newarr = JSON.parse(str);
+        console.log(newarr);
+        // that.setData({
+        //   formdata: newarr
+        // })
       },
-      fail: function(res) {}
+      fail:(res)=>{
+        consle.log(res);
+      }
     })
   },
-  inputchange: function(event) {
-    var detail = event.detail.detail;
-    var name = event.currentTarget.dataset.name;
+  inputchange: function (event) {
+    //smp180820289
+    let detail = event.detail.detail;
+    let name = event.currentTarget.dataset.name;
     this.setData({
       ['formdata.' + name]: detail.value
     })
   },
-  getuserid: function(event) {
-    var values = event.detail.detail.value;
-    console.log(values);
-    //http://192.168.3.203:9092/deviceDistribution/findDeviceByCode
-
+  /*获取其他属性*/
+  inputblur: function (event) {
+    let values = event.detail.detail.value;
     wx.request({
-      url: `http://${app.globalData.cjsystem}deviceDistribution/findDeviceByCode`,
+      url: `http://${app.globalData.cjdevice}deviceDistribution/findDeviceByCode`,
       data: {
-        deviceCode: values
+        currentLoginName: Object.keys(this.token)[0],
+        token: Object.values(this.token)[0],
+        deviceCode: values,
       },
-      success: function(result) {
-        console.log('request success', result.data)
-        
+      success: (result) => {
+        console.log('获取其他属性', result.data);
+        if (typeof (result.data) == 'object') {
+          this.setData({
+            ['formdata.unit']: result.data.unit,
+            ['formdata.upperLimit']: result.data.upperLimit,
+            ['formdata.lowerLimit']: result.data.lowerLimit,
+            ['formdata.deviceId']: result.data.deviceId
+          })
+        } else {
+          $Toast({
+            content: result.data,
+            type: 'warning'
+          });
+        }
       },
-
-      fail: function({
-        errMsg
-      }) {
+      fail: function ({errMsg}) {
         console.log('request fail', errMsg)
       }
     })
-
   },
-  handleClick: function() {
-    console.log(this.data.formdata);
-    if (this.data.formdata.value1 == '') {
+  /*点击添加*/
+  handleClick: function () {
+    if (this.data.formdata.deviceCode == '') {
       $Message({
         content: '设备编码不能为空',
         type: 'warning'
       });
-    } else if (this.data.formdata.value2 == '') {
+    } else if (this.data.formdata.deviceName == '') {
       $Message({
         content: '设备名称不能为空',
         type: 'warning'
       });
-    } else if (this.data.formdata.value3 == '') {
+    } else if (this.data.formdata.position == '') {
       $Message({
         content: '安装地点不能为空',
         type: 'warning'
       });
-    } else if (this.data.formdata.value7 == '') {
+    } else if (this.data.formdata.remark == '') {
       $Message({
         content: '备注信息不能为空',
         type: 'warning'
       });
     } else {
-      // $Toast({
-      //   content: '添加成功',
-      //   type: 'success'
-      // });
-      // wx.switchTab({
-      //   url: '../device/device'
-      // })
-
+      var sformdata = this.data.formdata;
+      wx.request({
+        url: `http://${app.globalData.cjdevice}deviceDistribution/addDeviceTooUser`,
+        data: {
+          currentLoginName: Object.keys(this.token)[0],
+          token: Object.values(this.token)[0],
+          userId: this.userId,
+          deviceName: sformdata.deviceName,
+          position: sformdata.position,
+          remark: sformdata.remark,
+          deviceId: sformdata.deviceId
+        },
+        success: (result) => {
+          console.log('添加', result.data);
+          if (result.data === true) {
+            $Toast({
+              content: '添加成功',
+              type: 'success',
+              duration: 1
+            });
+            setTimeout(function () {
+              wx.switchTab({
+                url: '../device/device'
+              })
+            }, 1000)
+          } else {
+            $Toast({
+              content: result.data,
+              type: 'warning'
+            });
+          }
+        },
+        fail: function ({
+          errMsg
+        }) {
+          console.log('request fail', errMsg)
+        }
+      })
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-
+  onLoad: function (options) {
+    this.userId = wx.getStorageSync('userId');
+    this.token = wx.getStorageSync('token');
   },
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
+  onReady: function () {
 
   }
+
 })

@@ -59,7 +59,8 @@ Page({
           passWord: spassword
         },
         success: function(result) {
-          console.log('request success', result.data)
+          console.log('login', result.data);
+          //登陆成功
           if (result.data.resultCode == '0000') {
             $Toast({
               content: result.data.resultDesc,
@@ -68,11 +69,15 @@ Page({
             });
             app.globalData.token = result.data.token;
             app.globalData.userId = result.data.data.userId;
+            wx.setStorageSync('token', result.data.token);
+            wx.setStorageSync('userId', result.data.data.userId);
+
             setTimeout(function() {
               wx.switchTab({
                 url: '../device/device'
               })
-            }, 1000)
+            }, 1000);
+            wx.setStorageSync('islogin', true);
           } else {
             $Toast({
               content: result.data.resultDesc,
@@ -96,7 +101,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    var islogin = wx.getStorageSync('islogin');
+    //console.log(islogin);
+    if (islogin){
+      wx.switchTab({
+        url: '../device/device'
+      })
+    }
   },
 
   /**

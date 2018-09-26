@@ -80,12 +80,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    screenWidth:null,
-    token:null,
-    userId:null,
-
+    screenWidth:null,//设备宽度
     cjdevice:null,//设备地址
     cjsystem:null,//系统地址
-
   }
 })

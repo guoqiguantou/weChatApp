@@ -1,20 +1,23 @@
 // pages/detail/detail.js
 const { $Toast } = require('../../dist/base/index');
 const { $Message } = require('../../dist/base/index');
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    listarr:[],
     formdata: {
-      value1: 'smp180820289',
-      value2: '设备A',
-      value3: '华南',
-      value4: 'cm',
-      value5: '3000.000',
-      value6: '0.000',
-      value7: '余生都是你',
+      deviceCode: '',/*设备编码*/
+      deviceName: '',/*设备名称*/
+      position: '',/*安装位置*/
+      unit: '',/*单位*/
+      upperLimit: '',/*测量上限*/
+      lowerLimit: '',/*测量下限*/
+      remark: '',/*备注*/
+      deviceId: ''/*设备id*/
     }
   },
   handleClick: function () {
@@ -54,6 +57,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // this.setData({
+    //   deviceId: options.deviceId
+    // })
+    this.userId = wx.getStorageSync('userId');
+    this.token = wx.getStorageSync('token');
+    //192.168.3.89:8888/device/findDeviceById?deviceID=
+    wx.request({
+      url: `http://192.168.3.89:8888/device/findDeviceById`,
+      data: {
+        deviceID: options.deviceId
+      },
+      success: function (result) {
+        console.log(result.data);
+        // $Toast({
+        //   content: result.data,
+        //   type: 'success',
+        //   duration: 2
+        // });
+      },
+      fail: function ({
+        errMsg
+      }) {
+        console.log('request fail', errMsg)
+      }
+    })
 
   },
 

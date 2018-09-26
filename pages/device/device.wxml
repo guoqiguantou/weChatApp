@@ -2,7 +2,7 @@
 <view class="container">
   <image src='../../image/bjtop.png' class='bjtop' mode='widthFix'></image>
   <view class='warp'>
-    <view class='itemcard' wx:for="{{listarr}}" wx:key="*this">
+    <view class='itemcard' wx:for="{{listarr}}" wx:key="{{item.deviceId}}">
       <i-card title="{{item.deviceName}}" extra="{{item.isOnline?'在线':'离线'}}" i-class='mycard'>
         <view slot="content">
           <i-row>
@@ -22,13 +22,13 @@
         </view>
         <view slot="footer">
           <view class='itemfooter'>
-            <navigator url='../detail/detail'>
-              <i-button bind:click="ondels" type="primary" size="small" inline="true" i-class='ibtn'>
+            <navigator url="../detail/detail?upperLimit={{item.upperLimit}}&lowerLimit={{item.lowerLimit}}&queueIpPort={{item.queueIpPort}}&queueName={{item.queueName}}&deviceCode={{item.deviceCode}}">
+              <i-button  type="primary" size="small" inline="true" i-class='ibtn'>
                 <i class="iconfont icon-chazhao"></i>查看
               </i-button>
             </navigator>
-            <navigator url='../edit/edit'>
-              <i-button bind:click="ondels" type="success" size="small" inline="true" i-class='ibtn'>
+            <navigator url="../edit/edit?deviceId={{item.deviceId}}">
+              <i-button  type="success" size="small" inline="true" i-class='ibtn'>
                 <i class="iconfont icon-bianji"></i>编辑
               </i-button>
             </navigator>
