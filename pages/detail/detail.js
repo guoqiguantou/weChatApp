@@ -28,14 +28,13 @@ Page({
       },
       method: "GET",
       success() {
-        console.log('连接成功2');
       },
       fail() {
         //console.log('连接失败')
       }
     });
     this.webSocketb.onOpen(()=>{
-      console.log('2连接上');
+      console.log('详情连接上');
       this.webSocketb.send({
         data: JSON.stringify({
           deviceCode: this.deviceCode,
@@ -58,12 +57,12 @@ Page({
             newxdata.push(newx[1]);
             newydata.push(newlist[0][3]);
           }else{
-            newxdata.push(newlist[0][4]);
+            var newx = newlist[0][4].split(" ");
+            newxdata.push(newx[1]);
             newxdata.shift();
             newydata.push(newlist[0][3]);
             newydata.shift();
           }
-                   
           this.setData({
             xdata: newxdata,
             ydata: newydata

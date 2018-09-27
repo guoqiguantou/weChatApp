@@ -2,9 +2,9 @@
 App({
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    //var logs = wx.getStorageSync('logs') || []
+    //logs.unshift(Date.now())
+    //wx.setStorageSync('logs', logs)
 
     // 登录
     wx.login({
@@ -65,7 +65,7 @@ App({
     wx.request({
       url: 'http://192.168.3.204:8904/getAllServer',
       success:(result)=>{
-        //console.log('request success', result.data)
+        console.log(result);
         this.globalData.cjdevice = result.data['cj-device'];
         this.globalData.cjsystem = result.data['cj-system'];
       },

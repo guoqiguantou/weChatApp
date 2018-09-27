@@ -1,11 +1,8 @@
 // pages/register/register.js
-const {
-  $Message
-} = require('../../dist/base/index');
-const {
-  $Toast
-} = require('../../dist/base/index');
-var util = require('../../utils/md5.js')
+const {$Message} = require('../../dist/base/index');
+const {$Toast} = require('../../dist/base/index');
+var util = require('../../utils/md5.js');
+var app = getApp();
 Page({
 
   /**
@@ -82,7 +79,7 @@ Page({
   },
   handleClick: function () {
     //点击注册
-    console.log(this.data.formdata);
+    //console.log(this.data.formdata);
     if (this.data.formdata.loginname == '' || this.data.formdata.loginname.length < 6 || this.data.formdata.loginname.length > 12) {
       $Message({
         content: '登录名不能为空且长度大于5位小于12位',
@@ -126,16 +123,15 @@ Page({
         duration: 1
       });
     } else {
-      $Toast({
-        content: '注册中',
-        type: 'loading',
-        duration: 1
-      });
-      var spassword = util.hexMD5(this.data.formdata.password)
-      var loginName = this.data.formdata.loginname, passWord = spassword, userName = this.data.formdata.name, sex = this.data.formdata.sex, telephone = this.data.formdata.phone, email = this.data.formdata.email
-      //192.168.3.202:8080/userLogin/addUser?loginName=?&passWord=?等等参数
+      var spassword = util.hexMD5(this.data.formdata.password);
+      var loginName = this.data.formdata.loginname;
+      var passWord = spassword;
+      var userName = this.data.formdata.name;
+      var sex = this.data.formdata.sex;
+      var telephone = this.data.formdata.phone;
+      var email = this.data.formdata.email;
       wx.request({
-        url: 'http://192.168.3.203:9092/userLogin/addUser',
+        url: `http://${app.globalData.cjsystem}userLogin/addUser`,
         data: {
           loginName: loginName,
           passWord: passWord,
@@ -145,27 +141,11 @@ Page({
           email: email
         },
         success: function (result) {
+          console.log(result.data)
           $Toast({
             content: result.data,
             duration: 1
           });
-
-          //console.log('request success', result.data)
-          // if (result.data.resultCode == '0000') {
-
-          //   setTimeout(function () {
-          //     wx.switchTab({
-          //       url: '../device/device'
-          //     })
-          //   }, 1000)
-
-          // } else {
-          //   $Toast({
-          //     content: result.data.resultDesc,
-          //     type: 'error',
-          //     duration: 1
-          //   });
-          // }
         },
 
         fail: function ({
@@ -174,17 +154,7 @@ Page({
           console.log('request fail', errMsg)
         }
       })
-
-
-
-      // setTimeout(() => {
-      //   $Toast.hide();
-      //   wx.navigateTo({
-      //     url: '../login/login'
-      //   })
-      // }, 2000);
     }
-
   },
   backlogin: function () {
     //返回登录页面
@@ -225,7 +195,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**

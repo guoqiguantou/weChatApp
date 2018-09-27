@@ -117,7 +117,7 @@ Page({
               type: 'success',
               duration: 1
             });
-            setTimeout(function () {
+            this.timeout=setTimeout(function () {
               wx.switchTab({
                 url: '../device/device'
               })
@@ -150,6 +150,9 @@ Page({
    */
   onReady: function () {
 
-  }
+  },
+  onUnload: function () {
+    clearTimeout(this.timeout)
+  },
 
 })

@@ -53,7 +53,8 @@ Page({
     this.userId = wx.getStorageSync('userId');
     this.token = wx.getStorageSync('token');
     //创建webSocket连接
-    var webSocketa=wx.connectSocket({
+    if (app.globalData.cjdevice){
+    var webSocketa = wx.connectSocket({
       url: `ws://${app.globalData.cjdevice}deviceData-websocket`,
       header: {
         'content-type': 'application/json'
@@ -64,6 +65,7 @@ Page({
       fail() {
       }
     });
+    
     //监听WebSocket 连接打开事件
     webSocketa.onOpen((res) => {
       //连接发送数据
@@ -81,6 +83,9 @@ Page({
         }
       })
     })
+    }
+  },
+  onUnload: function () {
     
-  }
+  },
 })
