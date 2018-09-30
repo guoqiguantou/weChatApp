@@ -1,6 +1,21 @@
 //app.js
 App({
   onLaunch: function () {
+    //获取网络地址
+    wx.request({
+      url: 'http://192.168.3.204:8904/getAllServer',
+      success: (result) => {
+        console.log(result.data);
+        this.globalData.cjdevice = result.data['cj-device'];
+        this.globalData.cjsystem = result.data['cj-system'];
+      },
+
+      fail: function ({
+        errMsg
+      }) {
+        console.log('request fail', errMsg)
+      }
+    })
     // 展示本地存储能力
     //var logs = wx.getStorageSync('logs') || []
     //logs.unshift(Date.now())
@@ -61,21 +76,7 @@ App({
         //console.log('初始化失败' + res);
       }
     })
-    //获取网络地址
-    wx.request({
-      url: 'http://192.168.3.204:8904/getAllServer',
-      success:(result)=>{
-        console.log(result);
-        this.globalData.cjdevice = result.data['cj-device'];
-        this.globalData.cjsystem = result.data['cj-system'];
-      },
-
-      fail: function ({
-        errMsg
-      }) {
-        console.log('request fail', errMsg)
-      }
-    })
+    
 
   },
   globalData: {

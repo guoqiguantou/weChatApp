@@ -83,6 +83,8 @@ Page({
         }
       })
     })
+    }else{
+      console.log('123321');
     }
   },
   onUnload: function () {
